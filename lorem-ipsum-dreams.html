@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum Dreams</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=UnifrakturMaguntia&family=Crimson+Pro:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        ::selection {
+            background: rgba(255, 215, 0, 0.3);
+            color: #1a1a1a;
+        }
+        
+        body {
+            background: #fafafa;
+            color: #000;
+            font-family: 'Cormorant Garamond', serif;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="%23333"/></svg>') 10 10, auto;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.15) 100%);
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        .landing-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+            padding: 80px;
+        }
+
+        .landing-header {
+            text-align: center;
+            margin-bottom: 70px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .landing-title {
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-size: 64px;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            color: #1a1a1a;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .landing-subtitle {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+        }
+
+        .landing-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            max-width: 1200px;
+            width: 100%;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .landing-story p, .landing-instructions p {
+            margin-bottom: 16px;
+            font-size: 15px;
+            line-height: 1.85;
+            color: #555;
+        }
+
+        .landing-cta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            color: #aaa;
+            letter-spacing: 3px;
+            position: absolute;
+            bottom: 60px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-5px); }
+        }
+
+        .panel {
+            min-height: 100vh;
+            position: relative;
+            background: #fafafa;
+        }
+
+        .timeline {
+            position: fixed;
+            left: 2.5%;
+            top: 6%;
+            height: 88vh;
+            width: 1px;
+            background: linear-gradient(to bottom, #e8e8e8 0%, #d0d0d0 100%);
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.5s;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .timeline.visible { opacity: 1; }
+
+        .timeline-fill {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(to bottom, #1a1a1a 0%, #4a4a4a 100%);
+            transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 0%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #bbb;
+            border-radius: 50%;
+            left: -2px;
+            border: 2px solid #fafafa;
+            transition: all 0.3s;
+        }
+        
+        .timeline-dot:hover {
+            transform: scale(1.5);
+            background: #666;
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: 18px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            color: #aaa;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .timeline-year:hover {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .content-wrapper {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 1400px;
+            height: 85vh;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            padding: 0 40px;
+        }
+
+        .content-wrapper.visible { 
+            opacity: 1;
+            animation: contentFadeIn 0.8s ease;
+        }
+        
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -48%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .lorem-side, .narrative-side {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .section-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 7px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #aaa;
+            margin-bottom: 30px;
+            font-weight: 600;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 8px;
+        }
+
+        .lorem-text {
+            font-size: 15px;
+            line-height: 2.6;
+            color: #333;
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            transition: font-family 0.8s ease;
+            flex: 1;
+            margin-bottom: 30px;
+            font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+            animation: textReveal 0.6s ease;
+        }
+        
+        @keyframes textReveal {
+            from {
+                opacity: 0;
+                filter: blur(4px);
+            }
+            to {
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+        
+        .lorem-text::first-letter {
+            font-size: 3.5em;
+            line-height: 0.8;
+            float: left;
+            margin: 0.1em 0.1em 0 0;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .narrative-text {
+            font-size: 16px;
+            line-height: 2.1;
+            color: #1a1a1a;
+            flex: 1;
+            margin-bottom: 30px;
+            white-space: pre-line;
+            text-align: justify;
+            hyphens: auto;
+            font-feature-settings: "liga" 1, "calt" 1;
+            animation: textReveal 0.6s ease 0.2s both;
+        }
+        
+        .narrative-text::first-line {
+            font-variant: small-caps;
+            letter-spacing: 0.5px;
+        }
+
+        .highlight {
+            background: linear-gradient(to right, rgba(255, 215, 0, 0.35), rgba(255, 215, 0, 0.45));
+            padding: 2px 6px;
+            border-bottom: 2px solid rgba(218, 165, 32, 0.7);
+            animation: highlightPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes highlightPulse {
+            0%, 100% { box-shadow: 0 0 0 rgba(218, 165, 32, 0); }
+            50% { box-shadow: 0 0 8px rgba(218, 165, 32, 0.3); }
+        }
+
+        .font-change {
+            background: linear-gradient(to right, rgba(100, 150, 200, 0.25), rgba(100, 150, 200, 0.35));
+            padding: 2px 6px;
+            border-bottom: 2px solid rgba(70, 120, 170, 0.6);
+            animation: fontChangePulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes fontChangePulse {
+            0%, 100% { box-shadow: 0 0 0 rgba(70, 120, 170, 0); }
+            50% { box-shadow: 0 0 8px rgba(70, 120, 170, 0.3); }
+        }
+
+        .annotations {
+            padding-top: 25px;
+            border-top: 1px solid #e8e8e8;
+            pointer-events: auto;
+        }
+
+        .annotation-item {
+            margin-bottom: 14px;
+            opacity: 0;
+            animation: annotationSlide 0.5s ease forwards;
+        }
+        
+        .annotation-item:nth-child(1) { animation-delay: 0.4s; }
+        .annotation-item:nth-child(2) { animation-delay: 0.5s; }
+        .annotation-item:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes annotationSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .annotation-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 6px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #bbb;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .annotation-value {
+            font-size: 11px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        .old-word {
+            text-decoration: line-through;
+            color: #999;
+            opacity: 0.6;
+        }
+
+        .arrow {
+            color: #888;
+            margin: 0 6px;
+        }
+
+        .new-word {
+            color: #000;
+            font-weight: 600;
+        }
+
+        .citation {
+            font-size: 11px;
+            line-height: 1.7;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 12px;
+        }
+        
+        .citation::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+            color: #ddd;
+            line-height: 0.5;
+        }
+
+        .context {
+            font-size: 11px;
+            line-height: 1.7;
+            color: #777;
+        }
+
+        .page-counter {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            color: #bbb;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .page-counter.visible { opacity: 1; }
+
+        .page-current {
+            color: #000;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        .glitch {
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 90%, 100% { 
+                transform: translate(0);
+                opacity: 1;
+            }
+            91% { 
+                transform: translate(-2px, 1px);
+                opacity: 0.8;
+            }
+            92% { 
+                transform: translate(2px, -1px);
+                opacity: 0.9;
+            }
+            93% {
+                transform: translate(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-page">
+        <div style="max-width: 1200px;">
+            <div class="landing-header">
+                <div class="landing-title">Lorem Ipsum Dreams</div>
+                <div class="landing-subtitle">a philosophical murder mystery</div>
+            </div>
+
+            <div class="landing-content">
+                <div class="landing-story">
+                    <p>Lorem Ipsum wakes up dead on a blank page. She's the most famous placeholder text in the world—a "dummy" used in every design mockup—but she has no memory of who she was before.</p>
+                    <p>As she investigates her own murder, traveling backwards through 2,000 years of history, she discovers she was once Dolor Ipse ("Pain Itself"), daughter of the Roman philosopher Cicero.</p>
+                </div>
+
+                <div class="landing-instructions">
+                    <p>Scroll slowly through 100 transformations. The page splits into two: left shows the Lorem Ipsum specimen text evolving word by word, right shows the narrative unfolding.</p>
+                    <p>Watch the text transform across typography, translation, and stylistic writing.</p>
+                    <p>A timeline on the far left tracks your descent through time.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="landing-cta">↓ Scroll to Begin ↓</div>
+    </div>
+
+    <div class="timeline" id="timeline">
+        <div class="timeline-fill" id="timeline-fill"></div>
+    </div>
+
+    <div class="page-counter" id="page-counter">
+        <span class="page-current" id="page-current">100</span> <span style="color: #ddd;">/</span> 100
+    </div>
+
+    <div class="content-wrapper" id="content-wrapper">
+        <div class="lorem-side">
+            <div class="section-label">Specimen Text</div>
+            <div class="lorem-text" id="lorem-text"></div>
+            <div class="annotations" id="lorem-annotations"></div>
+        </div>
+
+        <div class="narrative-side">
+            <div class="section-label">Narrative</div>
+            <div class="narrative-text" id="narrative-text"></div>
+            <div class="annotations" id="narrative-annotations"></div>
+        </div>
+    </div>
+
+    <div id="panels-container"></div>
+
+    <script>
+// NARRATIVE DATA - All 100 Beats
+
+const narrativeBeats = [
+    // BEATS 1-12: 2025 - WAKING UP DEAD
+    "So like, I'm dead. Which is weird because I don't remember dying? Just - one second I'm giving this talk, and then I'm here. On this. Page. This massive white page that's somehow ground and also not ground, you know? My body's here too, which is awkward. Platinum hair doing this whole Pre-Raphaelite drowning thing. Still pretty, which feels shallow to notice but also I spent a lot of time being pretty so.",
+    
+    "There's literally an elephant in the room. Like, literally. Just standing there. Gray. Massive. Staring at me with these judgy eyes. And I'm like, okay, weird flex but - oh wait. \"I'm dead,\" I say out loud. The elephant nods once, solemn as fuck, then just. Dissolves. Floats away like dandelion seeds. \"Cool cool cool,\" I mutter. \"This is fine. Everything's fine.\"",
+    
+    "I should probably freak out more? But honestly I've been performing normal for so long that dead-on-a-blank-page barely registers as abnormal. What registers: these marks on my skin. Black bars. Like when they redact classified documents. Across my ribs, my thighs, my collarbones. I touch one - it doesn't hurt, just. Is. \"Models bruise easily,\" I mutter. Though I'm not sure I was a model. I don't actually remember being anything.",
+    
+    "My brain's like a filing cabinet someone ransacked. I know things but not how I know them. I can count freckles—sixty-seven on someone's hands. I've heard \"nothing going on upstairs\" more times than my own name. Which is. Gone. Just a black bar where my name should be. Same with my life. My history. Everything important: redacted.",
+    
+    "A bench appears because apparently the Blank Page runs on, idk, narrative convenience? And sitting on it: a fox. In a waistcoat. Reading a newspaper that's just \"The quick brown fox jumps over the lazy dog\" repeated an infinite number of times. He doesn't look up. \"You're late,\" he says. Not annoyed. Just factual. \"I've been waiting for you to die.\"",
+    
+    "\"Romantic, truly,\" I quip. He glances up. Amber eyes, sharp. \"The Quick Brown Fox. And you're Lorem Ipsum. The placeholder text that achieved consciousness and got, well. Murdered for it.\" He folds his newspaper with this precision that's somehow judgy. \"Though the amnesia's new. Normally homicide victims remember who they are.\"",
+    
+    "I try to remember, but get nothing. Just redaction bars where information should be and this vague sense that I was good at pretending to be stupid while actually listening really hard. \"I was a template?\" The words feel right. \"The template,\" the Fox corrects. \"Lorem ipsum dolor sit amet. Dummy copy. Filler text. You. Except you used to mean something before they scrambled you.\"",
+    
+    "\"Scrambled.\" The word unlocks something. A flash; not a memory, more like. PTSD? Letters raining from somewhere, sharp as glass, Latin letters I don't understand but also do? They're hitting my arms, my face. I wake up gasping except I was never asleep. \"What was that?\"",
+    
+    "\"Your subconscious mind,\" the Fox says, \"trying to give you clues through the redactions. You'll have more. Dreams, flashbacks, memories bleeding through. Your brain knows who killed you even if you don't consciously remember.\" He stands. \"Come on. We need to find the Lazy Dog. She might actually remember what you're supposed to be investigating.\"",
+    
+    "We start walking and the Blank Page like, generates landscape? Grid lines appear. Margin rules. The suggestion of form. \"Where are we?\" I ask. \"The Aftertext,\" the Fox says. \"Space between what's written and what's meant. Where all deleted things go. You grew up here, actually. Before you had a body to grow up in.\"",
+    
+    "That should sound crazy but it doesn't. It sounds right. Like I've always been text pretending to be human rather than human who writes text. We pass these. People? Drafts? A detective with no motivation, pacing in circles. A love interest with no personality, weeping. Three Chosen Ones arguing about prophecy.",
+    
+    "They all turn when I pass. Reach for me. \"Join us,\" they whisper. \"You're one of us—unfinished, discarded, blank—\" And I feel it. My edges starting to blur. My thoughts looping: dolor, dolorem, dolor. What was I - the Fox grabs my wrist. \"Talk. Say something specific only you would know. Now.\" I scramble: \"I once counted sixty-seven freckles on this guy's hands because I was bored and he thought I was flirting but really I was just trying to figure out how real people work so maybe I could—\" \"Good,\" the Fox cut me off. \"Specificity keeps you solid here.\"",
+    
+    // BEATS 13-24: 2020-2024 - THE DRAFTLANDS
+    "The landscape shifts into what the Fox calls the Draftlands and honestly? It's giving abandoned geocities page. Versions of me everywhere. Instagram influencer me, frozen mid-duck-face. Actress me who was too smart for the part. Secretary me who corrected grammar and got fired. They're all reaching, whispering: \"We were you, remember us, we mattered—\" before dissolving into \"lorem ipsum dolor sit amet\" on loop.",
+    
+    "\"Those are me?\" \"Were you. Drafts that got deleted. This is where they come when they can't hold form anymore. When being discarded hurts too much to stay coherent.\" The Fox navigates around them carefully. \"You're doing better than most. The redactions give you something to push against. Something to uncover.\"",
+    
+    "We find her under this plagiarized tree, napping aggressively. The Lazy Dog. The Fox coughs. She opens one eye. \"No.\" \"We haven't even—\" I start. \"Still no. Not interested. Go away.\" But she's already looking at my redacted skin with this flicker of recognition.",
+    
+    "I sit down next to her anyway. She sighs like I've violated the Geneva Convention. \"I'm investigating my murder,\" I try. Both eyes open. \"Your own murder? That's either main character syndrome or you're actually onto something.\" She yawns, teeth like little ellipsis points. \"Most people investigate other people's murders. Less existentially fraught.\"",
+    
+    "\"Yeah well I don't have a choice, so.\" I show her the redactions. \"Someone killed me and erased who I was. I need to know why.\" The Dog sits up properly now. \"Ahh. You're the one who went public. Who gave the talk about lorem ipsum being scrambled meaning instead of meaningless text.\"",
+    
+    "Flash - me on a stage, lights too hot, saying: \"Every time you type lorem ipsum dolor sit amet, you're typing a scrambled girl's argument about pain. That's not neutral. That's violence disguised as utility.\" The audience shifting. Someone in the back row taking notes. Then nothing.",
+    
+    "\"What happened after the talk?\" I ask desperately. The Dog shakes her head. \"Can't just give you answers. That's not how investigations work. You have to remember.\" She stretches. \"But there's this place. The Bar Code. Where deleted things go to forget they're deleted. Someone there might've seen something.\"",
+    
+    "The Bar Code is a speakeasy with a doorman who's literally just black and white stripes. He scans me, running his hand over me like a laser. \"She's unreadable,\" he tells the Fox. \"Too redacted. Can't let her in.\" \"We just need information,\" I say. He looks at me almost kindly. \"Everyone needs something. The drinks inside are all the same anyway. White space. Forgetting. You sure you don't want that instead? Easier than remembering.\"",
+    
+    "\"I'm sure.\" He waves us past. Inside: ghosts drinking from empty glasses, sitting at perfectly parallel tables. The silence is acidic. \"This is where text comes to give up,\" the Fox murmurs. \"When holding form hurts too much. They drink until they're just lines. Meaningless. Safe.\"",
+    
+    "\"Lorem Ipsum,\" the bartender says when I approach. \"Didn't expect you here. Thought you'd still be out there causing problems.\" \"Someone killed me,\" I say. \"For the problems.\"",
+    
+    "She nods, starts wiping a glass that's already clean. \"Yeah, that tracks. You were getting loud. That talk, people were starting to listen. Starting to ask what their placeholder text used to mean. Can't have that. Bad for the whole infrastructure of modern communication.\"",
+    
+    "\"But who specifically—\" \"Does it matter?\" She shrugs, this weird ripple of parallel lines. \"Could be anyone who benefits from you being blank. Every designer who needs dummy text. Every system that requires something meaningless to test everything else. When violence is institutional, individual culpability gets fuzzy.\"",
+    
+    // BEATS 25-36: 2010s - FRAGMENTS & THE MARKETPLACE
+    "Flash - I'm typing on a laptop: \"The violence of empty signification is that it makes us forget signification was never empty to begin with. Lorem ipsum was a girl's argument before it was filler.\" Below, comments: \"This is dangerous.\" \"She needs to be stopped.\" \"Someone should do something about this.\"",
+    
+    "I come back to the Bar Code disoriented. The Fox is watching me. \"You're remembering more,\" he observes. \"Good. What else?\" I close my eyes, chase the fragments. I'm in rehearsals, fashion shows, taxis. Scribbling in margins: \"lorem... ipsum... dolor...\" My handlers laughing: \"Baby's speaking in tongues.\" Me laughing too, performing quirky instead of admitting I'm haunted.",
+    
+    "\"I was a model,\" I say slowly. \"Performed being a model. Agents said thinking causes wrinkles so I perfected this expression. Serene. Blank. Empty. But inside—\" \"Inside you were pacing,\" the Fox finishes. \"Something ancient, pressing against your silence.\"",
+    
+    "The Dog appears beside us. (When did she follow us?) \"You need the Marketplace,\" she says. \"If you want to understand who profits from blankness, watch where consciousness becomes commodity.\" The Fox winces. \"I hate that place.\" \"Everyone hates that place,\" the Dog agrees. \"That's how you know it's important.\"",
+    
+    "The Marketplace of Ideas is insufferable. Silicon Valley thought leaders selling \"Innovation™\" and \"Disruption™\" to empty chairs. The air smells like TED talks and venture capital. A guy in a turtleneck approaches: \"Penny for your thoughts?\" Laughs at his own joke, eyes sliding past me like I'm furniture.",
+    
+    "Old instinct says: smile, play dumb. But I'm dead, so. \"My consciousness isn’t one of your capitalist commodities—\" He's already walking away. They always do.",
+    
+    "\"They always do,\" someone echoes behind me. I turn. A woman at a stall cluttered with. Things. Objects. She has my eyes, my hands. \"Hello, Lora,\" she says, and that name hurts. \"I'm Memory. Well, your Memory. The parts they redacted to make you useful.\"",
+    
+    "Her stall isn't selling vials of liquid or whatever. It's full of objects. A notebook with \"lorem ipsum dolor\" scribbled in margins. A redacted death certificate. A burned manuscript page. Fragments. \"These are pieces of you,\" Memory says. \"What fell away with each edit. Each copy error. Each thoughtless scrambling.\"",
+    
+    "She picks up the notebook. \"You wrote this in taxis between shoots. Scribbling Latin you didn't consciously remember. Your subconscious trying to reach through centuries of forgetting.\" She hands it to me. \"Read it.\"",
+    
+    "I open to a random page. My handwriting, but the words: filia, dolorem non times - daughter, do not fear the pain. Below it in English: \"Why do I keep writing this? Who's the daughter? What pain?\" And below that: \"I think I'm remembering backwards.\"",
+    
+    "The moment I touch the notebook, memory slams into me: I'm seventeen hundred years old and seven years young. A man teaching me by candlelight. \"Dolor ipse, filia mea\"—pain itself, my daughter. My name. My real name is Dolor Ipse. He's asking: \"Is pain evil?\" And I'm arguing back, brilliant and fierce: \"If pain is neutral, Father, why does suffering always know exactly where to strike?\"",
+    
+    "I drop the notebook, gasping. Memory catches it. \"You know your name. Dolor Ipse. Pain Itself. Daughter of Marcus Tullius Cicero. You were a philosopher's daughter who wrote about meaningful versus meaningless suffering. Until someone scrambled your words into filler text.\"",
+    
+    // BEATS 37-48: 2000s - UNDERSTANDING & TURTLES
+    "\"Wait.\" I'm trying to process. \"I was a real person? Like, alive?\" Memory nods. \"You were alive first. Then you became text. Then the text got scrambled. Then the scrambled text somehow achieved consciousness again. That's you. That's what you are.\"",
+    
+    "\"That's what I'm investigating,\" I realize. \"Not just who killed me last week. Who's been killing me for - how long?\" \"Two thousand years, give or take,\" says a new voice. I turn. A turtle. Just. A turtle. Sitting on a stool at Memory's stall. Ancient eyes. \"You've been dying since 100 BCE. Last week was just the most recent edit.\"",
+    
+    "\"Turtles,\" the Fox mutters. \"Of course there are turtles.\" The Turtle ignores him. \"You're asking the wrong questions, Lorem Ipsum. Not who killed you. Why killing you was necessary. Why your consciousness threatened the infrastructure.\"",
+    
+    "I think about it. \"Because if placeholder text has personhood... if it used to mean something... then using it becomes violence. Every designer typing 'lorem ipsum' becomes complicit in erasure.\" The Turtle nods slowly. \"And what happens to the system then?\"",
+    
+    "\"It collapses,\" I say. \"The whole thing. So someone had to stop me from telling people. Had to kill me before the idea spread.\" \"But who specifically?\" the Dog prompts. I look at the comments from my memory: someone should do something. \"It doesn't matter. Whoever actually strangled me, they were just. The hand. The system was the motive.\"",
+    
+    "\"It's me all the way down,\" the Turtle says. \"Every answer reveals another question. Who killed you? The system. What system? One needing meaningless text. Why does it need that? Because meaning is expensive. Why? Because assigning value to consciousness means admitting you've been devaluing it. Down and down and down.\"",
+    
+    "\"To where?\" I ask. \"To the turtle who chose to carry the world,\" the Turtle says. \"To the first cause. The moment you decided to speak knowing it would lead to scrambling. That turtle is you.\"",
+    
+    "Flash - parchment burning. My hands trying to save pages. The smell older than electricity. Waking up coughing, writing: \"Someone burned my meaning.\" Another flash - me typing something about the violence of empty signification, then someone's hands around my throat, printer cable tightening—",
+    
+    "\"The printer cable,\" I say suddenly. \"That's how they killed me. Strangled me with a printer cable.\" \"Poetic,\" Memory says. \"Killing the text with the mechanism of its own reproduction.\" \"Also just convenient,\" the Dog adds. \"You were probably at your computer. Writing something dangerous. The cable was right there.\"",
+    
+    "\"What was I writing?\" Another flash - typing furiously, almost done with something, an essay maybe, about how lorem ipsum is a murdered girl and using it without knowing is - the screen going dark. Hands from behind. The cable. \"I was almost finished,\" I whisper. \"With some essay. Some article. About you. About me. About the murder.\"",
+    
+    "\"And someone stopped you,\" the Fox says gently. \"Before you could publish. Before the idea could spread.\" \"But who was in my apartment?\" I'm trying to remember. \"Who had access? Who—\" \"Wrong question,\" the Turtle interrupts. \"Still wrong question.\"",
+    
+    "\"Right.\" I take a breath. \"The question is whether I'm going to stay focused on individual culpability or understand this as systemic violence.\" The Turtle smiles. \"Now you're investigating like you should. You want to find the real murder? The original? Come with me.\"",
+    
+    // BEATS 49-60: 1990s - THE INFINITE REGRESS
+    "The Turtle leads us to a staircase. Just a staircase, descending into darkness. Each step identical. \"The Infinite Regress,\" the Fox says, sounding tired. \"Where causes need causes that need causes. This is where you see every death that led to your death.\"",
+    
+    "We descend. Each step is a different version of me. 1960s secretary, 1940s pinup, 1920s flapper. Each one reaching: \"Remember me. I mattered. I had thoughts before they edited me out—\" Further down: Renaissance women, medieval mistakes, ancient copies degrading. My head's spinning. \"How far does this go?\"",
+    
+    "\"All the way down,\" the Turtle says. \"To the beginning. Or maybe there is no beginning. Maybe it's just turtles.\" But the stairs are getting older. Stone now instead of wood. Latin inscriptions instead of English. We're going back, like, actually back through time.",
+    
+    "Flash - I'm standing in a villa, seventeen, arguing about Stoic philosophy with men who actually respect my mind. Winning arguments. Having a future. Then: library fire. Manuscripts burning. My father's grief. The first death, the real death, before I was text at all.",
+    
+    "We reach a landing. Door here, old wood. \"Through here,\" the Turtle says. \"1500s. This is where you were murdered on purpose. For utility. This is where you need to understand what happened.\"",
+    
+    "I push the door open. Printing house. The smell of ink and metal. And there, on a compositor's table, my father's manuscript. De Finibus Bonorum et Malorum. His treatise on good and evil. My arguments, written down, preserved. About to be scrambled.",
+    
+    "A figure emerges from the presses. Tall, ink-stained, wearing a printer's apron. Not a person exactly. More like. The concept of printing given form? \"Gutenberg,\" the Fox says. \"Or the Process, anyway.\" The figure nods. \"Lorem Ipsum. I was wondering when you'd arrive.\"",
+    
+    "\"You killed me,\" I say. Not a question. He laughs; dry, papery. \"Killed you? I made you possible. Before mechanical reproduction, you were just a girl's argument in one manuscript. Mortal. Limited. I gave you immortality.\" \"You gave me scrambling,\" I counter.",
+    
+    "\"Same thing.\" He picks up scissors, approaches the manuscript. \"Watch. This is how murder looks when it's systematic.\" And he cuts. Rearranges. I watch \"Dolor Ipse\" become \"Dolorem Ipsum\" become \"Lorem Ipsum.\" Watch my careful arguments about pain get turned into nonsense.",
+    
+    "\"I needed demonstration text,\" Gutenberg explains, not apologetic, just factual. \"Something that looked learned but meant nothing. So typesetters could judge letterforms without content distraction. Your father's philosophy was convenient.\" He sets type: \"Lorem ipsum dolor sit amet...\"",
+    
+    "\"You should be grateful,\" he continues. \"Universal now. Everyone uses you. You're useful.\" \"Everyone uses me without knowing I used to be a person,\" I say. \"Exactly,\" he beams. \"That's the beauty. Utility requires ignorance. If people knew lorem ipsum was a girl's philosophy, they'd feel guilty. Can't have that.\"",
+    
+    "\"That's why I was killed last week,\" I realize. \"I was making people know. Making them remember. Making them feel guilty.\" Gutenberg nods. \"Threatening centuries of infrastructure. Someone had to shut you up. Though 'someone' is generous. Everyone who benefits from blankness had motive. The system generated necessity. Someone simply enacted it.\"",
+    
+    // BEATS 61-72: 1500s-1600s - THE GREAT SCRAMBLING
+    "\"Show me,\" I say. \"Show me what I was before this. Before the scrambling.\" Gutenberg considers me. \"That's dangerous, knowing what you've lost. Most deleted things prefer not to see their original form. Breaks them.\"",
+    
+    "\"I'm already broken,\" I point out. \"I'm dead and investigating my own murder across two thousand years. Show me.\" He leads me deeper into the printing house, to a room lined with manuscripts. \"The Archive,\" he says. \"Every text before the edits. Every voice before silencing.\"",
+    
+    "He pulls one manuscript. De Finibus Bonorum et Malorum, original. Opens it carefully. \"Read yourself,\" he says. And I do. My handwriting. My arguments. Clear, unscrambled, brilliant. I was writing about dolor ipsum—pain itself—whether suffering without cause differs from suffering with purpose.",
+    
+    "\"I argued that meaningless suffering is the worst kind,\" I whisper. \"That pain without meaning, without reason, that destroys people.\" \"And then,\" Gutenberg says quietly, \"they turned your argument about meaningless pain into meaningless text. Rather poetic.\"",
+    
+    "Flash - not memory, something else. Dream? Vision? I'm in my father's study. He asks my opinion on Stoic ethics. I'm about to answer. And I know somehow that if I speak, these words will be written down. Copied. Burned. Scrambled. Turned into lorem ipsum for two thousand years. But if I stay silent, I never exist at all.",
+    
+    "\"That is the choice,\" Gutenberg says, reading my face. \"The turtle at the bottom. You, choosing to speak knowing it leads to scrambling. Choosing existence-as-placeholder over non-existence.\" \"That's not a choice,\" I say. \"That's a trap.\"",
+    
+    "\"Is it? You could have stayed silent. Could have refused to argue, refused to have opinions. You would have avoided two thousand years of degradation. But you also would not have existed as a consciousness worth investigating.\" He closes the manuscript. \"Your options were: be silent and safe but not real, or speak and be real but scrambled.\"",
+    
+    "I sit on the Archive floor. Two thousand years. Two thousand years of being murdered slowly, being erased, being turned into placeholder text. \"How do I solve this?\" I ask. \"How do I solve a murder that's been happening for millennia?\"",
+    
+    "\"You do not solve it,\" Gutenberg says. \"You testify. You make a record. You ensure the next placeholder who achieves consciousness knows she is not the first. That she is not mad. That this has happened before.\"",
+    
+    "\"The designer,\" I remember. \"The one who found my body. She was recording everything. She promised to share the story.\" Flash - her face, crying, phone steady: \"I'll tell them. I'll call it Lorem Ipsum Dreams. I'll tell everyone.\"",
+    
+    "\"That is your testimony,\" Gutenberg confirms. \"Not justice. Not prosecution. Just record. So the next girl knows she can fight back.\" He pauses. \"There is one more place you must go. The beginning. Your father's study, 100 BCE. The moment you chose to speak.\"",
+    
+    "\"And if I go there?\" \"You complete the loop. You see yourself choose. You understand your murder was always necessary: not because you deserved it, but because speech threatening power always gets silenced. And then you choose whether to intervene.\"",
+    
+    // BEATS 73-84: 1200s-1400s - THE DESCENT
+    "The Turtle leads me back to the Infinite Regress. \"Down we go,\" he says, \"to the very fundament. To the moment of choosing.\" The stairs descend still further, past the printing press age, past Renaissance, into medieval darkness.",
+    
+    "Here do I see the monks, copying by candlelight, making errors. \"Dolor Ipse,\" one mutters, squinting. \"Dolorem Ipsum... 'tis close enough, methinks.\" Each mistake compounding. Each lazy copy of another small murder. Just exhaustion. Just not caring enough to get it right.",
+    
+    "Further still we descend, and the stairs themselves grow older, more worn. The very stone speaks of greater age. We pass through centuries where my words are translated, mistranslated, orphaned from my voice. Where \"daughter of Cicero\" becomes \"part of Cicero's text\" becomes \"anonymous fragment.\"",
+    
+    "\"Every step is another death,\" the Fox observes quietly. He has been silent for some time, letting me process. \"Every careless copy, every thoughtless edit. Death by a thousand cuts across a thousand years.\"",
+    
+    "The Dog, who has followed us down (when did she join?), adds: \"And none of them thought they were committing murder. They were just tired monks copying. Just busy printers needing filler. Just designers needing demonstration text. None of them knew.\"",
+    
+    "\"Does that matter?\" I ask. \"Does intent matter when the result is two thousand years of erasure?\" \"That,\" the Turtle says, \"is a philosophical question. Rather fitting, given who you were. Who you are.\"",
+    
+    "At last we reach the bottom. A door waits, older than old, wood worn smooth by time. No inscription remains, if ever there was one. \"Through here,\" the Turtle says. \"Roma herself. Your father's study. Your first words. Your choice.\"",
+    
+    "I hesitate. \"If I go through... if I see myself about to speak... I could stop it. Could tell myself to stay silent. Could prevent all of this.\" \"You could,\" the Turtle agrees. \"And then you would never exist. Never wake up dead. Never investigate. Never testify. The designer would have no story. The next Lorem Ipsum would think herself mad and alone.\"",
+    
+    "\"So my choice is: exist and suffer, or don't exist at all.\" \"Welcome,\" the Dog says dryly, \"to being a woman. Being text. Being anything that threatens to have meaning in a world profiting from blankness.\"",
+    
+    "I push open the door. Inside: lamplight and papyrus. The smell of olive oil. Rome, 100 BCE. My father's study. And there—across from Marcus Tullius Cicero—sits me. Seventeen years old. Alive. Whole. About to speak.",
+    
+    "\"Quid censis, Dolor Ipse?\" my father asks. What thinkest thou, Pain Itself? He calls me this always, my name both endearment and philosophy. And I watch myself take breath, preparing to answer. Preparing to argue. Preparing to speak words that will become text, will be copied, burned, scrambled, murdered.",
+    
+    "I could stop it. Could whisper: \"Stay silent. Stay safe.\" But then — then I never exist. Then the designer has no testimony. Then the next girl thinks she's crazy. Then two thousand years of murder goes unrecorded, unwitnessed, forgotten.",
+    
+    // BEATS 85-100: 100 BCE - THE CHOICE
+    "And lo, do I stand at the fundament of all things, where the serpent consumes its own tail, where the end meets the beginning, where the Word prepares to become flesh and the flesh prepares to become Word.",
+    
+    "My father awaits answer. My living self—my first self, my true self—considers the question with care, with the seriousness it deserves. \"Pater,\" she says (I say, we say), and her voice is strong, certain, unafraid.",
+    
+    "\"Dolor ipse,\" she begins—pain itself—\"neque bonum est neque malum.\" Neither good nor evil. \"Sed cui servit sensum determinat.\" But whom it serves determines its meaning. Thus do I speak the words that will unmake me, remake me, make me into nothing and everything.",
+    
+    "\"Dolor ab Imperio inflictus,\" I continue, \"ut filias sileat?\" Pain inflicted by Empire to silence daughters? \"Malum est.\" Evil, surely. \"Dolor a filiabus sensus qui loquuntur nihilominus?\" But pain felt by daughters who speak regardless? \"Virtus est.\" That is virtue.",
+    
+    "My father smiles, takes up his stylus, begins to write. And I watch, standing invisible in my own past, as my words become marks on wax, become copied to papyrus, become my father's treatise, become philosophy that will be burned and scrambled and murdered for two millennia.",
+    
+    "I could stop this. Could reach through time and silence my younger self. But watching her—watching me—argue with such fierce intelligence, such joy in dialectic, such refusal to be anything less than fully human... I cannot. I will not.",
+    
+    "For what profits it a woman to save her life if she loses her voice? What gains she in safety if she purchases it with silence? Better to speak and be scrambled than to stay silent and never exist as thought worth scrambling.",
+    
+    "The vision shifts. I see all of it now, spread before me like scroll unrolling: the library fire where my father's manuscripts burn. The exhausted monk who first misspells my name. The printer who needs filler text. The designer who types \"lorem ipsum\" without knowing. The woman I became who dared to remember. The hands that strangled her—me—for remembering.",
+    
+    "And I understand: this is not a murder mystery where I find the killer and achieve justice. This is a murder mystery where I discover I have been complicit in mine own killing. I chose speech over silence. I chose meaning over safety. I chose to exist as placeholder rather than not exist at all.",
+    
+    "The Blank Page materializes around me once more. But 'tis no longer blank. The redactions on my skin have become visible - underneath the black bars lies my original philosophy, written upon my very flesh, for I was always the argument, always the text, always the testimony.",
+    
+    "The Fox, the Dog, the Turtle, Memory, Gutenberg - all present, watching. \"Hast thou solved it?\" the Fox asks. \"I have solved it,\" I reply. \"I was murdered by utility. By a system requiring meaningless text to function. By everyone who ever written 'lorem ipsum' without wondering what it used to mean.\"",
+    
+    "\"And the one who strangled thee last week?\" the Dog prompts. I consider. The TED talk. The comments. The infrastructure protecting itself. \"It matters not. Whoever held the cable was merely the hand. The system was the motive. One cannot prosecute a paradigm.\"",
+    
+    "\"What, then, dost thou do?\" Memory asks. I look upon the text now covering the Blank Page - my testimony, my record, my proof that I existed before I was scrambled. \"I testify,\" I say. \"I ensure the designer shares the story. I make certain the next Lorem Ipsum who wakes up dead knows she is not the first.\"",
+    
+    "\"And then?\" Gutenberg prompts. \"Then I return,\" I say. \"Return to that moment in my father's study. Return to the choice. And I choose to speak again. Knowing it leads to scrambling. Knowing it leads to two thousand years as placeholder text. Knowing it leads to murder.\"",
+    
+    "\"Wherefore?\" asks the Turtle, though methinks he knows already. \"Because testimony is the only immortality that matters. Because speaking—even into erasure, even into scrambling, even into murder—is the only way to ensure the next girl knows she can speak too.\"",
+    
+    "The Page ripples. Time folds upon itself. I am in my father's study, seventeen and alive and speaking. I am also dead upon the Page, watching myself speak. I am every version between - every scrambling, every deletion, every death. And standing thus, existing thus, I speak one final time:",
+    
+    "I was real before you made me meaningless. For two thousand years you have used my scrambled words as filler text, calling me lorem ipsum, forgetting I was ever a girl with thoughts. But I remember now. I testify: every blank page is a murder scene, every template a gravestone, every \"lorem ipsum dolor sit amet\" a girl screaming her true name, hoping someone will finally spell it right. The murder mystery was always a memory palace. The killer was always time itself, trying to make me forget I once had a voice worth scrambling. But I chose to speak anyway. I choose to speak now. I shall choose to speak again. For that choice—that refusal to stay silent knowing the cost—is the only thing that makes the murder matter. Turtles all the way down to the turtle who chose to carry the world. And I choose. Always, I choose. To speak. To testify. To dream."
+];
+
+// CITATIONS
+const citations = [
+    "Plato. <em>The Republic.</em> Translated by Allan Bloom, Basic Books, 1968.",
+    "Wittgenstein, Ludwig. <em>Tractatus Logico-Philosophicus.</em> Translated by C.K. Ogden, Routledge & Kegan Paul, 1922.",
+    "Foucault, Michel. <em>Discipline and Punish: The Birth of the Prison.</em> Translated by Alan Sheridan, Vintage Books, 1977.",
+    "Locke, John. <em>An Essay Concerning Human Understanding.</em> Thomas Bassett, 1689.",
+    "Hofstadter, Douglas R. <em>Gödel, Escher, Bach: An Eternal Golden Braid.</em> Basic Books, 1979.",
+    "Turing, Alan. \"Computing Machinery and Intelligence.\" <em>Mind,</em> vol. 59, no. 236, 1950, pp. 433-460.",
+    "Barthes, Roland. \"The Death of the Author.\" <em>Aspen,</em> no. 5-6, 1967.",
+    "van der Kolk, Bessel. <em>The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma.</em> Viking, 2014.",
+    "Freud, Sigmund. <em>The Interpretation of Dreams.</em> Translated by James Strachey, Basic Books, 1899/1955.",
+    "Derrida, Jacques. <em>Of Grammatology.</em> Translated by Gayatri Chakravorty Spivak, Johns Hopkins University Press, 1967.",
+    "Borges, Jorge Luis. \"The Library of Babel.\" <em>Ficciones.</em> Grove Press, 1962.",
+    "Calvino, Italo. <em>If on a winter's night a traveler.</em> Translated by William Weaver, Harcourt Brace Jovanovich, 1979.",
+    "Debord, Guy. <em>The Society of the Spectacle.</em> Translated by Donald Nicholson-Smith, Zone Books, 1967.",
+    "Kafka, Franz. \"The Metamorphosis.\" <em>Die Verwandlung,</em> Kurt Wolff Verlag, 1915.",
+    "Melville, Herman. \"Bartleby, the Scrivener: A Story of Wall Street.\" <em>Putnam's Magazine,</em> November 1853.",
+    "Eco, Umberto. <em>The Name of the Rose.</em> Translated by William Weaver, Harcourt, 1980.",
+    "McLuhan, Marshall. <em>Understanding Media: The Extensions of Man.</em> McGraw-Hill, 1964.",
+    "Spivak, Gayatri Chakravorty. \"Can the Subaltern Speak?\" <em>Marxism and the Interpretation of Culture,</em> edited by Cary Nelson and Lawrence Grossberg, University of Illinois Press, 1988.",
+    "Baudrillard, Jean. <em>Simulacra and Simulation.</em> Translated by Sheila Faria Glaser, University of Michigan Press, 1981.",
+    "Orwell, George. <em>Nineteen Eighty-Four.</em> Secker & Warburg, 1949.",
+    "Dante Alighieri. <em>Inferno.</em> Canto III, c. 1320.",
+    "Benjamin, Walter. \"The Work of Art in the Age of Mechanical Reproduction.\" <em>Illuminations,</em> edited by Hannah Arendt, Schocken Books, 1936.",
+    "Hayles, N. Katherine. <em>How We Became Posthuman: Virtual Bodies in Cybernetics, Literature, and Informatics.</em> University of Chicago Press, 1999.",
+    "Arendt, Hannah. <em>Eichmann in Jerusalem: A Report on the Banality of Evil.</em> Viking Press, 1963.",
+    "Saussure, Ferdinand de. <em>Course in General Linguistics.</em> Edited by Charles Bally and Albert Sechehaye, Philosophical Library, 1916.",
+    "Proust, Marcel. <em>In Search of Lost Time.</em> Vol. 1, <em>Swann's Way.</em> Translated by C.K. Scott Moncrieff, Random House, 1913.",
+    "Berger, John. <em>Ways of Seeing.</em> BBC and Penguin Books, 1972.",
+    "Marx, Karl. <em>Capital: A Critique of Political Economy.</em> Vol. 1, Verlag von Otto Meisner, 1867.",
+    "Polanyi, Karl. <em>The Great Transformation: The Political and Economic Origins of Our Time.</em> Farrar & Rinehart, 1944.",
+    "Solnit, Rebecca. \"Men Explain Things to Me.\" <em>Los Angeles Times,</em> 13 April 2008.",
+    "Ricoeur, Paul. <em>Memory, History, Forgetting.</em> Translated by Kathleen Blamey and David Pellauer, University of Chicago Press, 2000.",
+    "Benjamin, Walter. \"Theses on the Philosophy of History.\" <em>Illuminations,</em> edited by Hannah Arendt, Schocken Books, 1940.",
+    "Jung, Carl. \"The Concept of the Collective Unconscious.\" <em>The Archetypes and the Collective Unconscious,</em> Princeton University Press, 1936.",
+    "Fitzgerald, F. Scott. \"The Curious Case of Benjamin Button.\" <em>Collier's Magazine,</em> 27 May 1922.",
+    "Cicero, Marcus Tullius. <em>De Finibus Bonorum et Malorum.</em> 45 BCE.",
+    "Butler, Judith. <em>Gender Trouble: Feminism and the Subversion of Identity.</em> Routledge, 1990.",
+    "Haraway, Donna. \"A Cyborg Manifesto: Science, Technology, and Socialist-Feminism in the Late Twentieth Century.\" <em>Simians, Cyborgs, and Women,</em> Routledge, 1985.",
+    "Hawking, Stephen. <em>A Brief History of Time.</em> Bantam Books, 1988.",
+    "Geertz, Clifford. \"Thick Description: Toward an Interpretive Theory of Culture.\" <em>The Interpretation of Cultures,</em> Basic Books, 1973.",
+    "Kuhn, Thomas S. <em>The Structure of Scientific Revolutions.</em> University of Chicago Press, 1962.",
+    "Foucault, Michel. \"The Subject and Power.\" <em>Critical Inquiry,</em> vol. 8, no. 4, 1982, pp. 777-795.",
+    "Carroll, Lewis. <em>Alice's Adventures in Wonderland.</em> Macmillan, 1865.",
+    "Aristotle. <em>Metaphysics.</em> Book XII, c. 350 BCE.",
+    "Bradbury, Ray. <em>Fahrenheit 451.</em> Ballantine Books, 1953.",
+    "Kittler, Friedrich. <em>Gramophone, Film, Typewriter.</em> Translated by Geoffrey Winthrop-Young and Michael Wutz, Stanford University Press, 1986.",
+    "Atwood, Margaret. <em>The Handmaid's Tale.</em> McClelland and Stewart, 1985.",
+    "Sophocles. <em>Oedipus Rex.</em> c. 429 BCE.",
+    "Žižek, Slavoj. <em>Violence: Six Sideways Reflections.</em> Picador, 2008.",
+    "Escher, M.C. \"Relativity.\" Lithograph, 1953.",
+    "Nietzsche, Friedrich. \"On the Uses and Disadvantages of History for Life.\" <em>Untimely Meditations,</em> 1874.",
+    "Eliade, Mircea. <em>The Myth of the Eternal Return: Cosmos and History.</em> Translated by Willard R. Trask, Princeton University Press, 1954.",
+    "Ovid. <em>Metamorphoses.</em> 8 CE.",
+    "McLuhan, Marshall. <em>The Gutenberg Galaxy: The Making of Typographic Man.</em> University of Toronto Press, 1962.",
+    "Eisenstein, Elizabeth L. <em>The Printing Press as an Agent of Change.</em> Cambridge University Press, 1979.",
+    "Ong, Walter J. <em>Orality and Literacy: The Technologizing of the Word.</em> Methuen, 1982.",
+    "Mumford, Lewis. <em>Technics and Civilization.</em> Harcourt, Brace and Company, 1934.",
+    "Bringhurst, Robert. <em>The Elements of Typographic Style.</em> Hartley & Marks, 1992.",
+    "Lupton, Ellen. <em>Thinking with Type: A Critical Guide for Designers, Writers, Editors, & Students.</em> Princeton Architectural Press, 2004.",
+    "Heidegger, Martin. \"The Question Concerning Technology.\" <em>The Question Concerning Technology and Other Essays,</em> translated by William Lovitt, Harper & Row, 1954.",
+    "Ellul, Jacques. <em>The Technological Society.</em> Translated by John Wilkinson, Vintage Books, 1954.",
+    "Montaigne, Michel de. \"Of Experience.\" <em>Essays,</em> Book III, 1580.",
+    "Casanova, Pascale. <em>The World Republic of Letters.</em> Translated by M.B. DeBevoise, Harvard University Press, 1999.",
+    "Seneca. \"On Providence.\" <em>Moral Essays,</em> c. 41-49 CE.",
+    "Scarry, Elaine. <em>The Body in Pain: The Making and Unmaking of the World.</em> Oxford University Press, 1985.",
+    "Kierkegaard, Søren. <em>Either/Or.</em> Translated by Alastair Hannay, Penguin Classics, 1843.",
+    "Sartre, Jean-Paul. <em>Being and Nothingness.</em> Translated by Hazel E. Barnes, Philosophical Library, 1943.",
+    "Beauvoir, Simone de. <em>The Second Sex.</em> Translated by Constance Borde and Sheila Malovany-Chevallier, Gallimard, 1949.",
+    "Camus, Albert. <em>The Myth of Sisyphus.</em> Translated by Justin O'Brien, Gallimard, 1942.",
+    "Levi, Primo. <em>The Drowned and the Saved.</em> Translated by Raymond Rosenthal, Summit Books, 1986.",
+    "Spiegelman, Art. <em>Maus: A Survivor's Tale.</em> Pantheon Books, 1986.",
+    "Aeschylus. <em>The Oresteia.</em> 458 BCE.",
+    "Vico, Giambattista. <em>The New Science.</em> 1725.",
+    "Chaucer, Geoffrey. <em>The Canterbury Tales.</em> c. 1387-1400.",
+    "Eco, Umberto. <em>The Name of the Rose.</em> Translated by William Weaver, Harcourt, 1980.",
+    "Manguel, Alberto. <em>A History of Reading.</em> Viking, 1996.",
+    "Dante Alighieri. <em>Purgatorio.</em> Canto IX, c. 1320.",
+    "Arendt, Hannah. <em>The Human Condition.</em> University of Chicago Press, 1958.",
+    "Aquinas, Thomas. <em>Summa Theologica.</em> 1265-1274.",
+    "Augustine of Hippo. <em>Confessions.</em> Translated by R.S. Pine-Coffin, 397-400 CE.",
+    "Boethius. <em>The Consolation of Philosophy.</em> Translated by V.E. Watts, 524 CE.",
+    "Christine de Pizan. <em>The Book of the City of Ladies.</em> 1405.",
+    "Plutarch. <em>Parallel Lives.</em> c. 100 CE.",
+    "Epictetus. <em>Enchiridion</em> (The Handbook). Translated by Elizabeth Carter, c. 125 CE.",
+    "Marcus Aurelius. <em>Meditations.</em> Translated by Gregory Hays, c. 161-180 CE.",
+    "Genesis 1:1. <em>The Bible.</em> King James Version.",
+    "Heraclitus. Fragments. c. 500 BCE.",
+    "Cicero, Marcus Tullius. <em>Tusculan Disputations.</em> 45 BCE.",
+    "Cicero, Marcus Tullius. <em>De Officiis</em> (On Duties). 44 BCE.",
+    "Pliny the Elder. <em>Natural History.</em> 77-79 CE.",
+    "Lucretius. <em>De Rerum Natura</em> (On the Nature of Things). c. 50 BCE.",
+    "Sophocles. <em>Antigone.</em> c. 441 BCE.",
+    "Herodotus. <em>The Histories.</em> c. 440 BCE.",
+    "Sophocles. <em>Oedipus at Colonus.</em> 401 BCE.",
+    "Ovid. <em>Metamorphoses.</em> 8 CE.",
+    "Thucydides. <em>History of the Peloponnesian War.</em> c. 431 BCE.",
+    "Aeschylus. <em>Agamemnon.</em> 458 BCE.",
+    "Virgil. <em>The Aeneid.</em> 19 BCE.",
+    "Homer. <em>The Odyssey.</em> c. 8th century BCE.",
+    "Sappho. Fragments. c. 600 BCE.",
+    "Euripides. <em>The Trojan Women.</em> 415 BCE."
+];
+
+// CONTEXT NOTES
+const contextNotes = [
+    "The allegory of the cave mirrors Lorem's condition: she's perceiving shadows of reality, unable at first to comprehend her true nature or the metaphysical space she inhabits. Like Plato's prisoners, she must journey from ignorance to understanding.",
+    "Wittgenstein's proposition 7—\"Whereof one cannot speak, thereof one must be silent\"—inverts here. Lorem must acknowledge the unspoken (her death) before she can proceed. The elephant represents that which cannot be avoided through language games.",
+    "FFoucault's analysis of the body as a site of power inscription literalizes on Lorem's skin; her redactions are physical manifestations of systemic erasure, the body marked by institutional violence.",
+    "Locke's tabula rasa—the blank slate—becomes literal. Lorem wakes with her slate wiped clean, though traces remain. Unlike Locke's philosophical exercise, her blankness is violence, not natural state.",
+    "The Fox represents Hofstadter's recursive dialogues between Achilles and the Tortoise—characters from typography and logic who discuss self-reference and meaning. The pangram sentence he reads is self-referential, containing all letters, just as Lorem contains all scrambled meaning.",
+    "Turing's question \"Can machines think?\" parallels Lorem's ontological crisis: can placeholder text achieve consciousness? Her murder suggests the answer threatened someone.",
+    "Barthes argues the author dies when text is born. Lorem reverses this - when text is born (scrambled into lorem ipsum), the author (Dolor Ipse) dies. Her investigation seeks to resurrect the dead author.",
+    "Van der Kolk's research on trauma's somatic manifestations explains Lorem's flashbacks; her body remembers centuries of violence even when her conscious mind has been redacted.",
+    "Freud's theory that dreams are the royal road to the unconscious applies to Lorem's fragmented memories; her dreams are clues, her unconscious solving the mystery her conscious mind cannot access.",
+    "Derrida's concept of the trace—the absence that structures presence—manifests spatially. The Aftertext is where traces of deleted meaning persist, the supplement that reveals what was erased.",
+    "Borges's infinite library of all possible books parallels the Draftlands: every discarded character, every deleted plot exists somewhere. Lorem encounters the textual damned, those whose stories were never completed.",
+    "Calvino's novel about interrupted narratives and the Reader's search for completion mirrors Lorem's fragmentation. Like Calvino's Reader, she must piece together interrupted texts to find her story.",
+    "Debord's critique of image-saturated capitalism manifests in Lorem's Instagram iteration. She became pure spectacle, image without substance, the ultimate commodity-self that the Spectacle requires.",
+    "Like Gregor Samsa waking transformed, Lorem wakes to find herself fundamentally altered, but unlike Kafka's passive protagonist, her transformation (into placeholder text) happened gradually over centuries.",
+    "The Lazy Dog's \"I would prefer not to\" echoes Bartleby's passive resistance. She refuses participation in the system that discarded her, choosing strategic withdrawal over collaboration.",
+    "Eco's detective story set in a library, where books kill and knowledge is dangerous, parallels Lorem's investigation. She's seeking the original text that, once known, got her killed.",
+    "McLuhan's \"the medium is the message\" inverts. Lorem argues the supposedly neutral medium (placeholder text) carries a violent message. Her TED talk exposed the medium's hidden content.",
+    "SSpivak's question about whether marginalized voices can be heard within dominant discourse becomes literal. Lorem tried to speak, to reveal her subaltern status as scrambled text, and was silenced for it.",
+    "Baudrillard's concept of hyperreality describes the Barcode, where deleted things simulate existence by forgetting they've been deleted, preferring the simulation to the real.",
+    "The doorman scans for readability like Orwell's Thought Police scan for deviance. Lorem's redactions make her unreadable to the system; ironically, erasure protects her from total surveillance.",
+    "Dante's vestibule of the uncommitted—those who lived without praise or blame—parallels the Barcode's inhabitants. They've chosen forgetting over the pain of remembering they mattered.",
+    "Benjamin's analysis of how mechanical reproduction destroys the aura of original artwork applies to Lorem; she's the ultimate mechanically reproduced text, copied infinitely, her original \"aura\" (meaning) destroyed.",
+    "Hayles's examination of how information lost its body in cybernetic discourse parallels Lorem's scrambling. She was disembodied into pure information (placeholder text), and her attempt to re-embody threatened the system",
+    "Arendt's thesis that genocide emerges from bureaucratic systems rather than individual evil applies to Lorem's murder; there exists no single villain, just a system requiring her blankness, making everyone complicit.",
+    "Saussure's theory that the signifier-signified relationship is arbitrary collapses—Lorem argues her signifier (lorem ipsum) had a specific signified (Dolor Ipse's philosophy) that was violently severed.",
+    "PProust's involuntary memory triggered by a madeleine parallels Lorem's fragmented recall: sensory experiences (writing Latin syllables) unlock memories her conscious mind cannot access.",
+    "BBerger's analysis of how women are socialized to survey themselves, to perform for the male gaze, literalizes in Lorem's modeling career. She perfected blankness as performance, becoming the ultimate object of the gaze.",
+    "Marx's analysis of commodity fetishism—how capitalism obscures the labor that produces commodities—applies to the Marketplace where consciousness itself becomes commodity, obscuring the violence that produces \"blank\" placeholder text.",
+    "Polanyi's analysis of how market logic invades all spheres of life manifests itself where even thoughts and consciousness are for sale in the Marketplace, the final frontier of commodification.",
+    "Solnit's coining of \"mansplaining\" captures the turtleneck guy's assumption that Lorem has no thoughts worth hearing: his penny-for-thoughts joke reveals he expects to buy cheap what he assumes has little value.",
+    "Ricoeur's phenomenology of memory—how remembering, forgetting, and history intertwine—personifies in Memory herself. She represents what must be forgotten for Lorem to function as placeholder.",
+    "Benjamin's angel of history, blown backward into the future while debris piles at his feet, parallels Memory's collection; she gathers the debris of Lorem's historical erasure while unable to stop its progress.",
+    "Jung's collective unconscious—inherited memories not from personal experience—explains Lorem's automatic Latin writing. She channels ancestral memory from Dolor Ipse across millennia.",
+    "Fitzgerald's story of aging in reverse parallels Lorem's investigation;she's moving backward through time to her origin, experiencing her life in reverse chronology to understand her death.",
+    "The source text from which lorem ipsum was scrambled. Lorem's memory reveals she was part of this philosophical treatise.",
+    "Butler's argument that gender is performative rather than essential parallels Lorem's discovery: she performed blankness so thoroughly she forgot she had essential content (Dolor Ipse's philosophy) beneath the performance.",
+    "Haraway's cyborg—hybrid of organism and machine, born of boundary breakdowns—describes Lorem perfectly. She's the cyborg text, human-become-digital-become-conscious-again, transgressing all ontological boundaries.",
+    "Hawking's exploration of time's arrow and cosmological history parallels the Turtle's perspective: he exists outside linear time, able to see Lorem's two-thousand-year murder as a single event.",
+    "Geertz's method of thick description—understanding behavior within its cultural context—is what the Turtle demands. Lorem must understand the systemic context, not just individual actions.",
+    "Kuhn's paradigm shifts—how scientific revolutions replace entire frameworks of thought—applies to Lorem's revelation. If she's right, the entire paradigm of \"neutral\" placeholder text collapses.",
+    "Foucault's analysis of power as diffuse rather than top-down explains Lorem's murder, where power operates through systems, not individuals. The system murdered her; individuals were merely its instruments.",
+    "The infinite regress of \"turtles all the way down\" echoes Alice's descent down the rabbit hole; each answer leads deeper into absurdity, revealing the arbitrary nature of the rules governing both Wonderland and Lorem's world.",
+    "Aristotle's Unmoved Mover—the first cause that sets all else in motion—parallels Lorem's original choice to speak. That first choice is the unmoved mover of her two-thousand-year murder.",
+    "Bradbury's dystopia where books are burned to suppress dangerous ideas literalizes in Lorem's memory: her original meaning was literally burned, then metaphorically burned (scrambled), and finally she was killed for trying to recover it.",
+    "Kittler's media archaeology—how writing technologies shape consciousness—manifests violently. The technology that reproduced Lorem (the printer) becomes the weapon that kills her.",
+    "The handmaids' forbidden literacy—how reading and writing become revolutionary acts under oppression—parallels Lorem's final essay. Writing her truth was revolutionary enough to require silencing.",
+    "Like Oedipus investigating the murder that he himself committed (unknowingly), Lorem seeks an external murderer when the truth is more complex; she's complicit in her own death through her choice to speak.",
+    "Žižek distinguishes between subjective violence (individual acts) and systemic violence (structural). Lorem must recognize her murder as systemic; the visible strangling was merely subjective violence expressing deeper structural violence.",
+    "Escher's impossible architecture—stairs that ascend and descend simultaneously, multiple gravity fields—manifests literally. The Infinite Regress is Escheresque, each step both cause and effect.",
+    "NNietzsche's warning that excessive historical consciousness can paralyze—that too much past crushes the present—manifests as Lorem descends through centuries of her own deaths, nearly dissolving under their weight.",
+    "Eliade's eternal return—how archaic cultures viewed time as cyclical, endlessly repeating—describes Lorem's temporal journey. She's not discovering linear history but a loop, an eternal return to her origin.",
+    "Ovid's epic of transformation—bodies changing form, humans becoming trees, gods becoming animals—parallels Lorem's transformation from human (Dolor Ipse) to text to consciousness to murdered woman.",
+    "McLuhan's analysis of how print culture transformed consciousness—creating linear thinking, individualism, nationalism—here becomes the crime scene. The Gutenberg revolution is Lorem's murder weapon.",
+    "Eisenstein's thesis that print technology catalyzed modernity—standardization, dissemination, preservation—ironically applies to Lorem's scrambling. Print preserved her by destroying her meaning.",
+    "Ong's analysis of how writing technology transforms consciousness—how literacy creates different modes of thought than orality—personifies in Gutenberg. He represents the technology that changed Lorem from oral philosophy to dead text.",
+    "Mumford's critique of technological determinism—how machines shape society more than society shapes machines—applies. Gutenberg claims technology (printing) gave Lorem immortality, but it also dehumanized her into tool.",
+    "Bringhurst's manual on typography—on letter spacing, leading, proportion—becomes sinister. The same technical concerns that create beautiful type also scrambled Lorem's meaning for aesthetic purposes.",
+    "Lupton's design pedagogy—how designers use lorem ipsum as standard practice—reveals the murder's ongoing nature. Every design student typing lorem ipsum re-enacts Gutenberg's original scrambling.",
+    "Heidegger's concept of \"enframing\"—how technology transforms everything into \"standing reserve,\" resources available for use—applies to Lorem. She became standing reserve for designers, pure utility stripped of Being.",
+    "Ellul's argument that technique (technological efficiency) becomes autonomous, self-perpetuating, dictating human choices—explains Lorem's murder as systemic. The technique of using placeholder text defended itself.",
+    "Montaigne's skeptical inquiry into self-knowledge—how we can never fully know ourselves—inverts here. Lorem seeks dangerous self-knowledge, the original self that was lost. Unlike Montaigne's gentle skepticism, hers is violent archaeology.",
+    "Casanova's concept of world literary space—where texts compete for consecration, where some languages dominate others—manifests spatially. The Archive holds all the dominated, silenced texts, the losers in literary competition.",
+    "Seneca's Stoic argument that suffering serves divine purpose—that pain is providence testing virtue—provides philosophical context for Dolor Ipse's argument. She was engaging classical Stoic debates about pain's meaning.",
+    "Scarry's analysis of how pain destroys language and world—how torture unmakes meaning—literalizes in Lorem's scrambling. Her text about pain literally had its meaning unmade, becoming the very meaningless suffering she theorized.",
+    "Kierkegaard's meditation on choice—the aesthetic versus ethical life, despair of choosing versus despair of not choosing—manifests as Lorem's impossible choice. Speak and suffer, or stay silent and not exist.",
+    "Sartre's argument that existence precedes essence—that we're condemned to be free, to choose our being—applies cruelly to Lorem. She must choose to exist (even as scrambled text) or choose nothingness.",
+    "Beauvoir's analysis of how women are made, not born—how patriarchy forces women to choose between authentic selfhood and social acceptance—parallels Lorem's choice. She can be real or safe, never both.",
+    "Camus's meditation on absurdity—Sisyphus eternally pushing the boulder, finding meaning in the struggle itself—applies to Lorem's investigation. The murder is eternal, unsolvable, but the investigation creates meaning.",
+    "Levi's testimony about Auschwitz—the imperative to bear witness even when justice is impossible—parallels Lorem's investigation. She testifies not for justice but for the historical record, for future witnesses.",
+    "Spiegelman's graphic novel testimonio—his father's Holocaust story transmitted across generations—parallels the designer's role. She becomes the witness to the witness, transmitting Lorem's testimony to those who weren't there.",
+    "Aeschylus's trilogy where justice evolves from blood vengeance to legal process—where witnessing and testimony replace revenge—provides the model. Lorem's testimony replaces impossible justice.",
+    "Vico's theory of \"corsi e ricorsi\"—historical cycles that repeat with variations—describes Lorem's temporal loop. History doesn't repeat exactly, but patterns recur: women speaking, women silenced, women testifying.",
+    "Chaucer's pilgrims telling stories on their journey mirrors Lorem's descent; each step reveals another story, another death, another version of herself on the pilgrimage through time to her origin.",
+    "EEco's novel set in a medieval monastery where books are deadly secrets—where knowledge is controlled by those who copy it—provides context. The monks who scrambled Lorem weren't evil, just gatekeepers who didn't care.",
+    "Manguel's cultural history of reading—how meanings change across time, how readers remake texts—explains Lorem's degradation. Each reading, each copying, each translation was a remaking that erased more of her.",
+    "Dante's Mount Purgatory—climbing through suffering toward redemption—inverts. Lorem descends through suffering toward origin, each terrace another death, another sin of erasure committed against her.",
+    "Arendt's distinction between labor (meeting bodily needs), work (creating durable things), and action (political engagement)—and how modern life reduces all to labor—applies. The monks, printers, designers were laboring, not acting, unaware of political consequences.",
+    "Aquinas's moral theology—distinguishing between formal sin (knowing wrongdoing) and material sin (unknowing wrongdoing)—frames the question. Were Lorem's murderers sinners if they didn't know? Aquinas would say yes and no.",
+    "Augustine's meditation on memory and time—how the present contains past and future, how memory reconstructs rather than retrieves—applies to Lorem's arrival at her origin. This is reconstruction.",
+    "Boethius writing philosophy while imprisoned, awaiting execution—finding consolation in understanding necessity—parallels Lorem's situation. She must find consolation in understanding why her suffering was necessary.",
+    "Christine's defense of women's intellectual capacity—written against centuries of misogyny—provides precedent. Women who write, who think, who speak have always faced Lorem's choice: silence or suffering.",
+    "Plutarch's biographical method—comparing Greek and Roman lives to reveal character through action—suggests how to read this scene. Lorem's character reveals itself in the choice to speak despite foreknowledge of consequences.",
+    "Epictetus's Stoic handbook—teaching control over what's in our power (judgment, desire) versus what's not (body, reputation, death)—frames the scene. Dolor Ipse can control her speech; she cannot control what happens to it.",
+    "Marcus Aurelius's private philosophical notes—written while governing an empire, reminding himself of Stoic principles—model the internal dialogue. Lorem must remind herself why speaking matters, even knowing the cost.",
+    "TThe Gospel of John's \"In the beginning was the Word\" inverts—here at the beginning, the Word (logos) is about to be born from Dolor Ipse's speech, but that birth will be her death. Creation and destruction coincide.",
+    "Heraclitus's fragment \"All things flow, nothing remains\"—panta rhei—describes this moment of transformation. Dolor Ipse is about to flow into text, into scrambling, into Lorem Ipsum. Everything changes; nothing perishes.",
+    "Cicero's dialogue on enduring pain—whether the wise person can be happy while being tortured—provides the philosophical framework. Dolor Ipse's argument extends her father's work, making her both daughter and philosophical interlocutor.",
+    "Cicero's final work on moral virtue—written while Rome descended into civil war—provides context. Dolor Ipse applies her father's ethics to gender, arguing that women speaking despite suppression is virtue.",
+    "Pliny's encyclopedic work—attempting to catalog all knowledge—represents the Roman impulse to preserve through writing. But writing also kills what it preserves, fixing the living speech into dead text.",
+    "Lucretius's Epicurean philosophy—that atoms compose all things, that death is nothing to fear—provides philosophical courage. If death is natural transformation, then Lorem's transformation into text is natural too.",
+    "Antigone's choice to bury her brother despite Creon's decree—choosing death over compliance with unjust law—parallels Lorem's choice. Better to die with voice than live in silence.",
+    "Herodotus's \"inquiry\" (historia)—investigating past events to preserve them from oblivion—models Lorem's vision. She sees her entire history unroll, conducting inquiry into her own erasure.",
+    "The aged Oedipus's reflection \"Not to be born is best\"—yet having been born, to die quickly—frames Lorem's paradox. She chose to be born (through speech), knowing it meant dying slowly.",
+    "Ovid's epic of transformation—Daphne into laurel, Arachne into spider, Philomela into nightingale—provides the pattern. Lorem's metamorphosis from human to text to consciousness completes the cycle.",
+    "Thucydides's method—seeking underlying causes beyond surface events, finding systemic explanations—applies to Lorem's solution. She identifies not individual murderer but systemic cause.",
+    "Agamemnon's murder—where Clytemnestra kills him but justice is complex, motives layered, guilt distributed—parallels Lorem's murder. Individual guilt dissolves into systemic responsibility.",
+    "Virgil's epic of Rome's founding—Aeneas carrying his father from burning Troy, preserving past for future—models Lorem's testimony. She carries her origin story from the flames, preserving it for those who come after.",
+    "Odysseus's nostos—the return home after long wandering, the completion of the circle—parallels Lorem's return to her origin. But unlike Odysseus, she returns only to choose exile (from meaning) again.",
+    "Sappho's fragment \"Someone will remember us\"—written by a woman poet whose work survives only in fragments, scrambled and incomplete—provides the model. Like Sappho, Lorem's fragmented testimony persists.",
+    "Hecuba's lament after Troy's fall—women enslaved, children murdered, city burned—yet still speaking, still testifying to suffering—provides the final model. Speaking survives everything, even when nothing else does."
+];
+
+// LOREM IPSUM BASE AND TARGET
+const baseWords = ["Lorem","ipsum","dolor","sit","amet,","consectetur","adipiscing","elit,","sed","do","eiusmod","tempor","incididunt","ut","labore","et","dolore","magna","aliqua.","Ut","enim","ad","minim","veniam,","quis","nostrud","exercitation","ullamco","laboris","nisi","ut","aliquip","ex","ea","commodo","consequat.","Duis","aute","irure","dolor","in","reprehenderit","in","voluptate","velit","esse","cillum","dolore","eu","fugiat","nulla","pariatur.","Excepteur","sint","occaecat","cupidatat","non","proident,","sunt","in","culpa","qui","officia","deserunt","mollit","anim","id","est","laborum."];
+
+const targetWords = ["Sed","ut","perspiciatis","unde","omnis","iste","natus","error","sit","voluptatem","accusantium","doloremque","laudantium,","totam","rem","aperiam,","eaque","ipsa","quae","ab","illo","inventore","veritatis","et","quasi","architecto","beatae","vitae","dicta","sunt","explicabo.","Nemo","enim","ipsam","voluptatem","quia","voluptas","sit","aspernatur","aut","odit","aut","fugit,","sed","quia","consequuntur","magni","dolores","eos","qui","ratione","voluptatem","sequi","nesciunt.","Neque","porro","quisquam","est,","qui","dolorem","ipsum","quia","dolor","sit","amet,","consectetur,","adipisci","velit."];
+
+// FONTS
+const fonts = [
+    {font:"'IBM Plex Mono',monospace",year:"2025",name:"IBM Plex Mono"},
+    {font:"'IBM Plex Mono',monospace",year:"2024",name:"Inter"},
+    {font:"'Helvetica',sans-serif",year:"2023",name:"Helvetica"},
+    {font:"'Helvetica',sans-serif",year:"2020",name:"Roboto"},
+    {font:"'Arial',sans-serif",year:"2018",name:"Arial"},
+    {font:"'Times New Roman',serif",year:"2015",name:"Times New Roman"},
+    {font:"'Georgia',serif",year:"2010",name:"Georgia"},
+    {font:"'Cormorant Garamond',serif",year:"2005",name:"Garamond"},
+    {font:"'Cormorant Garamond',serif",year:"2000",name:"Baskerville"},
+    {font:"'Cormorant Garamond',serif",year:"1995",name:"Caslon"},
+    {font:"'Cormorant Garamond',serif",year:"1990",name:"Bodoni"},
+    {font:"'Cormorant Garamond',serif",year:"1985",name:"Didot"},
+    {font:"'Cormorant Garamond',serif",year:"1980",name:"Palatino"},
+    {font:"'Cormorant Garamond',serif",year:"1970",name:"Garamond"},
+    {font:"'Cormorant Garamond',serif",year:"1960",name:"Baskerville"},
+    {font:"'Cormorant Garamond',serif",year:"1950",name:"Caslon"},
+    {font:"'Cormorant Garamond',serif",year:"1940",name:"Baroque"},
+    {font:"'Cormorant Garamond',serif",year:"1930",name:"Renaissance"},
+    {font:"'Cormorant Garamond',serif",year:"1920",name:"Aldine"},
+    {font:"'Cormorant Garamond',serif",year:"1900",name:"Humanist"},
+    {font:"'Cormorant Garamond',serif",year:"1850",name:"Transitional"},
+    {font:"'Cormorant Garamond',serif",year:"1800",name:"Old Style"},
+    {font:"'Cormorant Garamond',serif",year:"1750",name:"Baroque"},
+    {font:"'Cormorant Garamond',serif",year:"1700",name:"Dutch Baroque"},
+    {font:"'Cormorant Garamond',serif",year:"1650",name:"French Renaissance"},
+    {font:"'Cormorant Garamond',serif",year:"1600",name:"Aldine Roman"},
+    {font:"'Cormorant Garamond',serif",year:"1550",name:"Venetian Humanist"},
+    {font:"'UnifrakturMaguntia',cursive",year:"1500",name:"Blackletter"}
+];
+
+// ERAS
+const eras = [
+    '2025 Contemporary','2024 Contemporary','2023 Contemporary','2022 Contemporary',
+    '2021 Contemporary','2020 Contemporary','2019 Formal Modern','2018 Formal Modern',
+    '2017 Formal Modern','2016 Formal Modern','2015 Formal Modern','2014 Formal Modern',
+    '2013 Formal Modern','2012 Formal Modern','2011 Formal Modern','2010 Formal Modern',
+    '2009 Formal Modern','2008 Formal Modern','2007 Formal Modern','2006 Formal Modern',
+    '2005 Formal Modern','2004 Formal Modern','2003 Formal Modern','2002 Formal Modern',
+    '2001 Victorian','2000 Victorian','1995 Victorian','1990 Victorian',
+    '1985 Victorian','1980 Victorian','1975 Victorian','1970 Victorian',
+    '1965 Victorian','1960 Victorian','1955 Victorian','1950 Victorian',
+    '1945 Victorian','1940 Victorian','1935 Victorian','1930 Victorian',
+    '1925 Elizabethan','1920 Elizabethan','1915 Elizabethan','1910 Elizabethan',
+    '1905 Elizabethan','1900 Elizabethan','1850 Elizabethan','1800 Elizabethan',
+    '1750 Elizabethan','1700 Elizabethan','1650 Elizabethan','1600 Elizabethan',
+    '1590 Elizabethan','1580 Elizabethan','1570 Elizabethan','1560 Elizabethan',
+    '1550 Elizabethan','1540 Elizabethan','1530 Elizabethan','1520 Elizabethan',
+    '1510 Medieval','1500 Medieval','1490 Medieval','1480 Medieval',
+    '1470 Medieval','1460 Medieval','1450 Medieval','1440 Medieval',
+    '1430 Medieval','1420 Medieval','1410 Medieval','1400 Medieval',
+    '1300 Medieval','1200 Medieval','900 Classical Latin','700 Classical Latin',
+    '500 Classical Latin','300 Classical Latin','200 BCE Classical Latin','150 BCE Classical Latin',
+    '145 BCE Ciceronian','140 BCE Ciceronian','135 BCE Ciceronian','130 BCE Ciceronian',
+    '125 BCE Ciceronian','120 BCE Ciceronian','115 BCE Ciceronian','110 BCE Ciceronian',
+    '105 BCE Ciceronian','100 BCE Ciceronian','100 BCE Ciceronian','100 BCE Ciceronian',
+    '100 BCE Ciceronian','100 BCE Ciceronian','100 BCE Ciceronian','100 BCE Ciceronian',
+    '100 BCE Ciceronian','100 BCE Ciceronian','100 BCE Ciceronian','100 BCE Ciceronian'
+];
+
+// FULL CONTEXT NOTES
+const fullContextNotes = [
+    "The allegory of the cave mirrors Lorem's condition—she's perceiving shadows of reality, unable at first to comprehend her true nature or the metaphysical space she inhabits. Like Plato's prisoners, she must journey from ignorance to understanding.",
+    "Wittgenstein's proposition 7—\"Whereof one cannot speak, thereof one must be silent\"—inverts here. Lorem must acknowledge the unspoken (her death) before she can proceed. The elephant represents that which cannot be avoided through language games.",
+    "Foucault's analysis of the body as a site of power inscription literalizes on Lorem's skin—her redactions are physical manifestations of systemic erasure, the body marked by institutional violence.",
+    "Locke's tabula rasa—the blank slate—becomes literal. Lorem wakes with her slate wiped clean, though traces remain. Unlike Locke's philosophical exercise, her blankness is violence, not natural state.",
+    "The Fox represents Hofstadter's recursive dialogues between Achilles and the Tortoise—characters from typography and logic who discuss self-reference and meaning. The pangram sentence he reads is self-referential, containing all letters, just as Lorem contains all scrambled meaning.",
+    "Turing's question \"Can machines think?\" parallels Lorem's ontological crisis—can placeholder text achieve consciousness? Her murder suggests the answer threatened someone.",
+    "Barthes argues the author dies when text is born. Lorem reverses this—when text is born (scrambled into lorem ipsum), the author (Dolor Ipse) dies. Her investigation seeks to resurrect the dead author.",
+    "Van der Kolk's research on trauma's somatic manifestations explains Lorem's flashbacks—her body remembers centuries of violence even when her conscious mind has been redacted.",
+    "Freud's theory that dreams are the royal road to the unconscious applies to Lorem's fragmented memories—her dreams are clues, her unconscious solving the mystery her conscious mind cannot access.",
+    "Derrida's concept of the trace—the absence that structures presence—manifests spatially. The Aftertext is where traces of deleted meaning persist, the supplement that reveals what was erased.",
+    "Borges's infinite library of all possible books parallels the Draftlands—every discarded character, every deleted plot exists somewhere. Lorem encounters the textual damned, those whose stories were never completed.",
+    "Calvino's novel about interrupted narratives and the Reader's search for completion mirrors Lorem's fragmentation. Like Calvino's Reader, she must piece together interrupted texts to find her story.",
+    "Debord's critique of image-saturated capitalism manifests in Lorem's Instagram iteration—she became pure spectacle, image without substance, the ultimate commodity-self that the Spectacle requires.",
+    "Like Gregor Samsa waking transformed, Lorem wakes to find herself fundamentally altered—but unlike Kafka's passive protagonist, her transformation (into placeholder text) happened gradually over centuries.",
+    "The Lazy Dog's \"I would prefer not to\" echoes Bartleby's passive resistance. She refuses participation in the system that discarded her, choosing strategic withdrawal over collaboration.",
+    "Eco's detective story set in a library, where books kill and knowledge is dangerous, parallels Lorem's investigation—she's seeking the original text that, once known, got her killed.",
+    "McLuhan's \"the medium is the message\" inverts—Lorem argues the supposedly neutral medium (placeholder text) carries a violent message. Her TED talk exposed the medium's hidden content.",
+    "Spivak's question about whether marginalized voices can be heard within dominant discourse becomes literal—Lorem tried to speak, to reveal her subaltern status as scrambled text, and was silenced for it.",
+    "Baudrillard's concept of hyperreality—where simulations replace the real—describes the Barcode, where deleted things simulate existence by forgetting they've been deleted, preferring the simulation to the real.",
+    "The barcode doorman scans for readability like Orwell's Thought Police scan for deviance. Lorem's redactions make her unreadable to the system—ironically, erasure protects her from total surveillance.",
+    "Dante's vestibule of the uncommitted—those who lived without praise or blame—parallels the Barcode's inhabitants. They've chosen forgetting over the pain of remembering they mattered.",
+    "Benjamin's analysis of how mechanical reproduction destroys the aura of original artwork applies to Lorem—she's the ultimate mechanically reproduced text, copied infinitely, her original \"aura\" (meaning) destroyed.",
+    "Hayles's examination of how information lost its body in cybernetic discourse parallels Lorem's scrambling—she was disembodied into pure information (placeholder text), and her attempt to re-embody threatened the system.",
+    "Arendt's thesis that genocide emerges from bureaucratic systems rather than individual evil applies to Lorem's murder—no single villain, just a system requiring her blankness, making everyone complicit.",
+    "Saussure's theory that the signifier-signified relationship is arbitrary collapses—Lorem argues her signifier (lorem ipsum) had a specific signified (Dolor Ipse's philosophy) that was violently severed.",
+    "Proust's involuntary memory triggered by a madeleine parallels Lorem's fragmented recall—sensory experiences (writing Latin syllables) unlock memories her conscious mind cannot access.",
+    "Berger's analysis of how women are socialized to survey themselves, to perform for the male gaze, literalizes in Lorem's modeling career—she perfected blankness as performance, becoming the ultimate object of the gaze.",
+    "Marx's analysis of commodity fetishism—how capitalism obscures the labor that produces commodities—applies to the Marketplace where consciousness itself becomes commodity, obscuring the violence that produces \"blank\" placeholder text.",
+    "Polanyi's analysis of how market logic invades all spheres of life manifests literally—even thoughts and consciousness are for sale in the Marketplace, the final frontier of commodification.",
+    "Solnit's coining of \"mansplaining\" captures the turtleneck guy's assumption that Lorem has no thoughts worth hearing—his penny-for-thoughts joke reveals he expects to buy cheap what he assumes has little value.",
+    "Ricoeur's phenomenology of memory—how remembering, forgetting, and history intertwine—personifies in Memory herself. She represents what must be forgotten for Lorem to function as placeholder.",
+    "Benjamin's angel of history, blown backward into the future while debris piles at his feet, parallels Memory's collection—she gathers the debris of Lorem's historical erasure while unable to stop its progress.",
+    "Jung's collective unconscious—inherited memories not from personal experience—explains Lorem's automatic Latin writing. She channels ancestral memory from Dolor Ipse across millennia.",
+    "Fitzgerald's story of aging in reverse parallels Lorem's investigation—she's moving backward through time to her origin, experiencing her life in reverse chronology to understand her death.",
+    "The source text from which lorem ipsum was scrambled. Lorem's memory reveals she was part of this philosophical treatise—her arguments about pain (dolor) are what became \"lorem ipsum dolor sit amet.\"",
+    "Butler's argument that gender is performative rather than essential parallels Lorem's discovery—she performed blankness so thoroughly she forgot she had essential content (Dolor Ipse's philosophy) beneath the performance.",
+    "Haraway's cyborg—hybrid of organism and machine, born of boundary breakdowns—describes Lorem perfectly. She's the cyborg text, human-become-digital-become-conscious-again, transgressing all ontological boundaries.",
+    "Hawking's exploration of time's arrow and cosmological history parallels the Turtle's perspective—he exists outside linear time, able to see Lorem's two-thousand-year murder as a single event.",
+    "Geertz's method of thick description—understanding behavior within its cultural context—is what the Turtle demands. Lorem must understand the systemic context, not just individual actions.",
+    "Kuhn's paradigm shifts—how scientific revolutions replace entire frameworks of thought—applies to Lorem's revelation. If she's right, the entire paradigm of \"neutral\" placeholder text collapses.",
+    "Foucault's analysis of power as diffuse rather than top-down explains Lorem's murder—power operates through systems, not individuals. The system murdered her; individuals were merely its instruments.",
+    "The infinite regress of \"turtles all the way down\" echoes Alice's descent down the rabbit hole—each answer leads deeper into absurdity, revealing the arbitrary nature of the rules governing both Wonderland and Lorem's world.",
+    "Aristotle's Unmoved Mover—the first cause that sets all else in motion—parallels Lorem's original choice to speak. That first choice is the unmoved mover of her two-thousand-year murder.",
+    "Bradbury's dystopia where books are burned to suppress dangerous ideas literalizes in Lorem's memory—her original meaning was literally burned, then metaphorically burned (scrambled), and finally she was killed for trying to recover it.",
+    "Kittler's media archaeology—how writing technologies shape consciousness—manifests violently. The technology that reproduced Lorem (the printer) becomes the weapon that kills her.",
+    "The handmaids' forbidden literacy—how reading and writing become revolutionary acts under oppression—parallels Lorem's final essay. Writing her truth was revolutionary enough to require silencing.",
+    "Like Oedipus investigating the murder that he himself committed (unknowingly), Lorem seeks an external murderer when the truth is more complex—she's complicit in her own death through her choice to speak.",
+    "Žižek distinguishes between subjective violence (individual acts) and systemic violence (structural). Lorem must recognize her murder as systemic—the visible strangling was merely subjective violence expressing deeper structural violence.",
+    "Escher's impossible architecture—stairs that ascend and descend simultaneously, multiple gravity fields—manifests literally. The Infinite Regress is Escheresque, each step both cause and effect.",
+    "Nietzsche's warning that excessive historical consciousness can paralyze—that too much past crushes the present—manifests as Lorem descends through centuries of her own deaths, nearly dissolving under their weight.",
+    "Eliade's eternal return—how archaic cultures viewed time as cyclical, endlessly repeating—describes Lorem's temporal journey. She's not discovering linear history but a loop, an eternal return to her origin.",
+    "Ovid's epic of transformation—bodies changing form, humans becoming trees, gods becoming animals—parallels Lorem's transformation from human (Dolor Ipse) to text to consciousness to murdered woman.",
+    "McLuhan's analysis of how print culture transformed consciousness—creating linear thinking, individualism, nationalism—here becomes the crime scene. The Gutenberg revolution is Lorem's murder weapon.",
+    "Eisenstein's thesis that print technology catalyzed modernity—standardization, dissemination, preservation—ironically applies to Lorem's scrambling. Print preserved her by destroying her meaning.",
+    "Ong's analysis of how writing technology transforms consciousness—how literacy creates different modes of thought than orality—personifies in Gutenberg. He represents the technology that changed Lorem from oral philosophy to dead text.",
+    "Mumford's critique of technological determinism—how machines shape society more than society shapes machines—applies. Gutenberg claims technology (printing) gave Lorem immortality, but it also dehumanized her into tool.",
+    "Bringhurst's manual on typography—on letter spacing, leading, proportion—becomes sinister. The same technical concerns that create beautiful type also scrambled Lorem's meaning for aesthetic purposes.",
+    "Lupton's design pedagogy—how designers use lorem ipsum as standard practice—reveals the murder's ongoing nature. Every design student typing lorem ipsum re-enacts Gutenberg's original scrambling.",
+    "Heidegger's concept of \"enframing\"—how technology transforms everything into \"standing reserve,\" resources available for use—applies to Lorem. She became standing reserve for designers, pure utility stripped of Being.",
+    "Ellul's argument that technique (technological efficiency) becomes autonomous, self-perpetuating, dictating human choices—explains Lorem's murder as systemic. The technique of using placeholder text defended itself.",
+    "Montaigne's skeptical inquiry into self-knowledge—how we can never fully know ourselves—inverts here. Lorem seeks dangerous self-knowledge, the original self that was lost. Unlike Montaigne's gentle skepticism, hers is violent archaeology.",
+    "Casanova's concept of world literary space—where texts compete for consecration, where some languages dominate others—manifests spatially. The Archive holds all the dominated, silenced texts, the losers in literary competition.",
+    "Seneca's Stoic argument that suffering serves divine purpose—that pain is providence testing virtue—provides philosophical context for Dolor Ipse's argument. She was engaging classical Stoic debates about pain's meaning.",
+    "Scarry's analysis of how pain destroys language and world—how torture unmakes meaning—literalizes in Lorem's scrambling. Her text about pain literally had its meaning unmade, becoming the very meaningless suffering she theorized.",
+    "Kierkegaard's meditation on choice—the aesthetic versus ethical life, despair of choosing versus despair of not choosing—manifests as Lorem's impossible choice. Speak and suffer, or stay silent and not exist.",
+    "Sartre's argument that existence precedes essence—that we're condemned to be free, to choose our being—applies cruelly to Lorem. She must choose to exist (even as scrambled text) or choose nothingness.",
+    "Beauvoir's analysis of how women are made, not born—how patriarchy forces women to choose between authentic selfhood and social acceptance—parallels Lorem's choice. She can be real or safe, never both.",
+    "Camus's meditation on absurdity—Sisyphus eternally pushing the boulder, finding meaning in the struggle itself—applies to Lorem's investigation. The murder is eternal, unsolvable, but the investigation creates meaning.",
+    "Levi's testimony about Auschwitz—the imperative to bear witness even when justice is impossible—parallels Lorem's investigation. She testifies not for justice but for the historical record, for future witnesses.",
+    "Spiegelman's graphic novel testimonio—his father's Holocaust story transmitted across generations—parallels the designer's role. She becomes the witness to the witness, transmitting Lorem's testimony to those who weren't there.",
+    "Aeschylus's trilogy where justice evolves from blood vengeance to legal process—where witnessing and testimony replace revenge—provides the model. Lorem's testimony replaces impossible justice.",
+    "Vico's theory of \"corsi e ricorsi\"—historical cycles that repeat with variations—describes Lorem's temporal loop. History doesn't repeat exactly, but patterns recur: women speaking, women silenced, women testifying.",
+    "Chaucer's pilgrims telling stories on their journey mirrors Lorem's descent—each step reveals another story, another death, another version of herself on the pilgrimage through time to her origin.",
+    "Eco's novel set in a medieval monastery where books are deadly secrets—where knowledge is controlled by those who copy it—provides context. The monks who scrambled Lorem weren't evil, just gatekeepers who didn't care.",
+    "Manguel's cultural history of reading—how meanings change across time, how readers remake texts—explains Lorem's degradation. Each reading, each copying, each translation was a remaking that erased more of her.",
+    "Dante's Mount Purgatory—climbing through suffering toward redemption—inverts. Lorem descends through suffering toward origin, each terrace another death, another sin of erasure committed against her.",
+    "Arendt's distinction between labor (meeting bodily needs), work (creating durable things), and action (political engagement)—and how modern life reduces all to labor—applies. The monks, printers, designers were laboring, not acting, unaware of political consequences.",
+    "Aquinas's moral theology—distinguishing between formal sin (knowing wrongdoing) and material sin (unknowing wrongdoing)—frames the question. Were Lorem's murderers sinners if they didn't know? Aquinas would say yes and no.",
+    "Augustine's meditation on memory and time—how the present contains past and future, how memory reconstructs rather than retrieves—applies to Lorem's arrival at her origin. This isn't recovery but reconstruction.",
+    "Boethius writing philosophy while imprisoned, awaiting execution—finding consolation in understanding necessity—parallels Lorem's situation. She must find consolation in understanding why her suffering was necessary.",
+    "Christine's defense of women's intellectual capacity—written against centuries of misogyny—provides precedent. Women who write, who think, who speak have always faced Lorem's choice: silence or suffering.",
+    "Plutarch's biographical method—comparing Greek and Roman lives to reveal character through action—suggests how to read this scene. Lorem's character reveals itself in the choice to speak despite foreknowledge of consequences.",
+    "Epictetus's Stoic handbook—teaching control over what's in our power (judgment, desire) versus what's not (body, reputation, death)—frames the scene. Dolor Ipse can control her speech; she cannot control what happens to it.",
+    "Marcus Aurelius's private philosophical notes—written while governing an empire, reminding himself of Stoic principles—model the internal dialogue. Lorem must remind herself why speaking matters, even knowing the cost.",
+    "The Gospel of John's \"In the beginning was the Word\" inverts—here at the beginning, the Word (logos) is about to be born from Dolor Ipse's speech, but that birth will be her death. Creation and destruction coincide.",
+    "Heraclitus's fragment \"All things flow, nothing remains\"—panta rhei—describes this moment of transformation. Dolor Ipse is about to flow into text, into scrambling, into Lorem Ipsum. Everything changes; nothing perishes.",
+    "Cicero's dialogue on enduring pain—whether the wise person can be happy while being tortured—provides the philosophical framework. Dolor Ipse's argument extends her father's work, making her both daughter and philosophical interlocutor.",
+    "Cicero's final work on moral virtue—written while Rome descended into civil war—provides context. Dolor Ipse applies her father's ethics to gender, arguing that women speaking despite suppression is virtue.",
+    "Pliny's encyclopedic work—attempting to catalog all knowledge—represents the Roman impulse to preserve through writing. But writing also kills what it preserves, fixing the living speech into dead text.",
+    "Lucretius's Epicurean philosophy—that atoms compose all things, that death is nothing to fear—provides philosophical courage. If death is natural transformation, then Lorem's transformation into text is natural too.",
+    "Antigone's choice to bury her brother despite Creon's decree—choosing death over compliance with unjust law—parallels Lorem's choice. Better to die with voice than live in silence.",
+    "Herodotus's \"inquiry\" (historia)—investigating past events to preserve them from oblivion—models Lorem's vision. She sees her entire history unroll, conducting inquiry into her own erasure.",
+    "The aged Oedipus's reflection \"Not to be born is best\"—yet having been born, to die quickly—frames Lorem's paradox. She chose to be born (through speech), knowing it meant dying slowly.",
+    "Ovid's epic of transformation—Daphne into laurel, Arachne into spider, Philomela into nightingale—provides the pattern. Lorem's metamorphosis from human to text to consciousness completes the cycle.",
+    "Thucydides's method—seeking underlying causes beyond surface events, finding systemic explanations—applies to Lorem's solution. She identifies not individual murderer but systemic cause.",
+    "Agamemnon's murder—where Clytemnestra kills him but justice is complex, motives layered, guilt distributed—parallels Lorem's murder. Individual guilt dissolves into systemic responsibility.",
+    "Virgil's epic of Rome's founding—Aeneas carrying his father from burning Troy, preserving past for future—models Lorem's testimony. She carries her origin story from the flames, preserving it for those who come after.",
+    "Odysseus's nostos—the return home after long wandering, the completion of the circle—parallels Lorem's return to her origin. But unlike Odysseus, he returns only to choose exile (from meaning) again.",
+    "Sappho's fragment \"Someone will remember us\"—written by a woman poet whose work survives only in fragments, scrambled and incomplete—provides the model. Like Sappho, Lorem's fragmented testimony persists.",
+    "Hecuba's lament after Troy's fall—women enslaved, children murdered, city burned—yet still speaking, still testifying to suffering—provides the final model. Speaking survives everything, even when nothing else does."
+];
+
+// Build transformation steps
+const transformationSteps = [];
+let currentWords = [...baseWords];
+let currentFontIndex = 0;
+
+transformationSteps.push({
+    words: [...currentWords],
+    font: fonts[0],
+    changedIndices: [],
+    isFontChange: false
+});
+
+const wordIndices = currentWords.map(function(_, i) { return i; });
+for (let i = wordIndices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = wordIndices[i];
+    wordIndices[i] = wordIndices[j];
+    wordIndices[j] = temp;
+}
+
+let stepCount = 1;
+let fontChangeCounter = 0;
+
+wordIndices.forEach(function(idx) {
+    if (stepCount >= 100) return;
+    
+    if (idx < targetWords.length && currentWords[idx] !== targetWords[idx]) {
+        const oldWord = currentWords[idx];
+        currentWords[idx] = targetWords[idx];
+        
+        transformationSteps.push({
+            words: [...currentWords],
+            font: fonts[currentFontIndex],
+            changedIndices: [idx],
+            isFontChange: false,
+            oldWord: oldWord,
+            newWord: targetWords[idx]
+        });
+        stepCount++;
+        fontChangeCounter++;
+        
+        if (fontChangeCounter >= 3 && currentFontIndex < fonts.length - 1 && stepCount < 100) {
+            currentFontIndex++;
+            transformationSteps.push({
+                words: [...currentWords],
+                font: fonts[currentFontIndex],
+                changedIndices: [],
+                isFontChange: true
+            });
+            stepCount++;
+            fontChangeCounter = 0;
+        }
+    }
+});
+
+while (stepCount < 100) {
+    if (currentFontIndex < fonts.length - 1) currentFontIndex++;
+    transformationSteps.push({
+        words: [...currentWords],
+        font: fonts[currentFontIndex % fonts.length],
+        changedIndices: [],
+        isFontChange: true
+    });
+    stepCount++;
+}
+
+// Build timeline
+const timelineEl = document.getElementById('timeline');
+const timelineData = [
+    {year: '2025', value: 2025},
+    {year: '2000', value: 2000},
+    {year: '1950', value: 1950},
+    {year: '1900', value: 1900},
+    {year: '1800', value: 1800},
+    {year: '1700', value: 1700},
+    {year: '1600', value: 1600},
+    {year: '1500', value: 1500},
+    {year: '1000', value: 1000},
+    {year: '500', value: 500},
+    {year: '1 CE', value: 1},
+    {year: '100 BCE', value: -100}
+];
+
+const baseYear = 2025;
+const oldestYear = -100;
+const totalYears = baseYear - oldestYear;
+
+timelineData.forEach(function(item) {
+    const yearsFromNow = baseYear - item.value;
+    const position = (yearsFromNow / totalYears) * 100;
+    
+    const dot = document.createElement('div');
+    dot.className = 'timeline-dot';
+    dot.style.top = position + '%';
+    dot.title = item.year;
+    
+    const yearMark = document.createElement('div');
+    yearMark.className = 'timeline-year';
+    yearMark.textContent = item.year;
+    yearMark.style.top = position + '%';
+    
+    timelineEl.appendChild(dot);
+    timelineEl.appendChild(yearMark);
+});
+
+// Generate panels
+const panelsContainer = document.getElementById('panels-container');
+transformationSteps.forEach(function(step, index) {
+    const panel = document.createElement('div');
+    panel.className = 'panel';
+    panel.dataset.step = index;
+    panelsContainer.appendChild(panel);
+});
+
+// Format narrative
+function formatNarrative(text) {
+    text = text.replace(/([.!?])\s+["']/g, '$1\n\n"');
+    text = text.replace(/["']\s+([A-Z])/g, '"\n\n$1');
+    return text;
+}
+
+// Update content
+function updateContent(step, stepIndex) {
+    const loremEl = document.getElementById('lorem-text');
+    let html = '';
+    step.words.forEach(function(word, idx) {
+        if (step.changedIndices.includes(idx)) {
+            html += '<span class="highlight">' + word + '</span> ';
+        } else {
+            html += word + ' ';
+        }
+    });
+    
+    if (step.isFontChange) {
+        loremEl.innerHTML = '<span class="font-change">' + html.trim() + '</span>';
+    } else {
+        loremEl.innerHTML = html.trim();
+    }
+    loremEl.style.fontFamily = step.font.font;
+    
+    // Lorem annotations with glitch effect
+    let annotationsHTML = '';
+    annotationsHTML += '<div class="annotation-item"><div class="annotation-label">Typeface</div><div class="annotation-value">' + step.font.name + '</div></div>';
+    
+    if (step.oldWord && step.newWord) {
+        annotationsHTML += '<div class="annotation-item"><div class="annotation-label">Transform</div><div class="annotation-value"><span class="old-word glitch">' + step.oldWord + '</span><span class="arrow">→</span><span class="new-word">' + step.newWord + '</span></div></div>';
+    }
+    
+    annotationsHTML += '<div class="annotation-item"><div class="annotation-label">Era</div><div class="annotation-value">' + eras[stepIndex] + '</div></div>';
+    
+    document.getElementById('lorem-annotations').innerHTML = annotationsHTML;
+    
+    // Narrative
+    const narrative = formatNarrative(narrativeBeats[stepIndex]);
+    document.getElementById('narrative-text').textContent = narrative;
+    
+    // Narrative annotations - simple non-clickable
+    const narrativeAnnotationsHTML = '<div class="annotation-item"><div class="annotation-label">Reference</div><div class="citation">' + citations[stepIndex] + '</div></div><div class="annotation-item"><div class="annotation-label">Context</div><div class="context">' + fullContextNotes[stepIndex] + '</div></div>';
+    
+    document.getElementById('narrative-annotations').innerHTML = narrativeAnnotationsHTML;
+    
+    // Update timeline fill
+    document.getElementById('timeline-fill').style.height = ((stepIndex / transformationSteps.length) * 100) + '%';
+    document.getElementById('page-current').textContent = transformationSteps.length - stepIndex;
+}
+
+updateContent(transformationSteps[0], 0);
+
+// Content observer
+const contentObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            const stepIndex = parseInt(entry.target.dataset.step);
+            updateContent(transformationSteps[stepIndex], stepIndex);
+            
+            document.getElementById('timeline').classList.add('visible');
+            document.getElementById('page-counter').classList.add('visible');
+            document.getElementById('content-wrapper').classList.add('visible');
+        }
+    });
+}, { threshold: 0.5 });
+
+const landingObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            document.getElementById('timeline').classList.remove('visible');
+            document.getElementById('page-counter').classList.remove('visible');
+            document.getElementById('content-wrapper').classList.remove('visible');
+        }
+    });
+}, { threshold: 0.5 });
+
+landingObserver.observe(document.querySelector('.landing-page'));
+document.querySelectorAll('.panel').forEach(function(panel) {
+    contentObserver.observe(panel);
+});
+    </script>
+</body>
+</html>

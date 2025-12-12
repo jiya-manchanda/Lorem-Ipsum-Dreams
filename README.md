@@ -1,6 +1,6 @@
 # Lorem Ipsum Dreams
 
-**A philosophical murder mystery told through transforming typography**
+**A philosophical murder mystery told by way of metamorphosizing typography**
 
 Lorem Ipsum wakes up dead on a blank page. She's the world's most famous placeholder text—a "dummy" used in every design mockup—but she has no memory of who she was before. As she investigates her own murder, traveling backwards through 2,000 years of history, she discovers she was once Dolor Ipse ("Pain Itself"), daughter of the Roman philosopher Cicero.
 
